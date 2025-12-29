@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoticeHub</title>
+    <link rel="stylesheet" href="styles/eventupload.css">
+</head>
+
+<body>
+    <div class="form-container">
+
+
+        <form id="eventForm">
+            <input type="text" name="title" placeholder="Event Title" id="title" required>
+
+            <input type="date" name="date" id="date" required>
+
+            <input type="time" name="time" id="time" required>
+
+            <input type="text" name="venue" id="venue" placeholder="Venue" required>
+
+            <div class="file-upload">
+                <input type="file" id="photo" name="photo" accept="image/*" required hidden>
+                <label for="photo" class="file-btn">Choose Poster</label>
+                <span class="file-name">No file chosen</span>
+              </div>
+            <textarea name="description" id="description" placeholder="Description" rows="4" required></textarea>
+
+            <input type="url" name="registrationLink" id="registrationLink" placeholder="Registration Link (optional)">
+
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+    <script type="module" src="script/firebase.js"></script>
+
+</body>
+
+</html>
