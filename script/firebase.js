@@ -8,7 +8,7 @@ import { getFirestore } from
 import { getStorage } from
     "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-import { firebaseConfig } from "../.gitignore/firebaseConfig.js";
+import { firebaseConfig } from "../.gitignore/firebaseConfig";
 
 
 export const app = initializeApp(firebaseConfig);

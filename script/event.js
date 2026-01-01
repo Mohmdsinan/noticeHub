@@ -7,22 +7,13 @@ import {
   query,
   orderBy
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-
-/* 🔹 Firebase Config */
-const firebaseConfig = {
-  apiKey: "AIzaSyB1C2NneOhDhCbKAEFl1mx8y9ttBfCM7Vo",
-  authDomain: "noticehub-e49e5.firebaseapp.com",
-  projectId: "noticehub-e49e5",
-};
-
-
+ import { firebaseConfig } from "../.gitignore/firebaseConfig";
 const eventsGrid = document.getElementById("eventsGrid");
 
 /* 🔹 Fetch & Render Events */
 async function loadEvents() {
-  eventsGrid.innerHTML = "";
-
+  eventsGrid.innerHTML = " ";
+    
   const q = query(collection(db, "events"), orderBy("createdAt", "desc"));
   const snapshot = await getDocs(q);
 
