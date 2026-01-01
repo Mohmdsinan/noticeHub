@@ -21,7 +21,8 @@
   <div class="content-container">
     <div class="announcement-container">
       <p class="announcement-heading">Announcement</p>
-      <p class="announcement-text">There will be a meeting on 7th February 2026 at 1 p.m. in the main meeting room. We will be discussing
+      <p class="announcement-text">There will be a meeting on 7th February 2026 at 1 p.m. in the main meeting room. We
+        will be discussing
         customer complaints and Q4 strategy. Since the topic is very important, 100% presence is a must.
         Please come on time and don't forget to bring the necessary documents.
         Thank you,
@@ -30,23 +31,32 @@
     </div>
 
     <div class="upcoming-events-container">
-      <div class="event-card">
-        <img src="images/buildathon.heic" alt="event photo">
-        <p class="event-description">We practiced it.
-          Now we BUILD it. 💥
-          Join the Buildathon by Elevate
+      <p class="upcoming-events-heading">Upcoming Events</p>
 
-          📅 Dec 26,2025 - Jan 03,2026
-          ⏰ 09:00 AM – 04:00 PM
-          📍 Connect Room
-          Let’s ship something cool 💻👉🏻
-        </p>
-      </div>
+      <!-- Firebase events will be injected here -->
+      <div class="events-grid" id="eventsGrid"></div>
     </div>
-  </div>
+
+      <div class="event-card-container">
+        <div class="event-card">
+          <img src="images/buildathon.heic" alt="event photo">
+          <p class="event-description">We practiced it.
+            Now we BUILD it. 💥
+            Join the Buildathon by Elevate
+
+            📅 Dec 26,2025 - Jan 03,2026
+            ⏰ 09:00 AM – 04:00 PM
+            📍 Connect Room
+            Let’s ship something cool 💻👉🏻
+          </p>
+          <p class="event-date">Dec 26,2025 - Jan 03,2026</p>
+          <p class="event-time">09:00 AM – 04:00 PM</p>
+          <p class="event-venue">Connect Room</p>
+        </div>
+      </div>
 
 
-
+      <script type="module" src="script/event.js"></script>
 
 </body>
 

@@ -1,25 +1,19 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+// firebase.js
+import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore } from
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyB1C2NneOhDhCbKAEFl1mx8y9ttBfCM7Vo",
-    authDomain: "noticehub-e49e5.firebaseapp.com",
-    projectId: "noticehub-e49e5",
-    storageBucket: "noticehub-e49e5.firebasestorage.app",
-    messagingSenderId: "357112458996",
-    appId: "1:357112458996:web:8196851787f6c85c1bf8a1"
-};
+import { getStorage } from
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app)
+import { firebaseConfig } from "../.gitignore/firebaseConfig.js";
 
 
+export const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
 const form = document.getElementById("eventForm")
 
 form.addEventListener("submit", async (e) => {
@@ -36,6 +30,7 @@ form.addEventListener("submit", async (e) => {
         createdAt: new Date()
     };
 
+    console.log(eventData);
     try {
         await addDoc(collection(db, "events"), eventData);
         alert("Event sent successfully");
@@ -56,4 +51,27 @@ fileInput.addEventListener("change", () => {
     fileName.textContent = fileInput.files.length
         ? fileInput.files[0].name
         : "No file chosen";
+});
+
+
+document.getElementById("eventForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const fileInput = document.getElementById("photo");
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Please select an image");
+        return;
+    }
+
+    // Create unique file name
+    const fileRef = ref(storage, `event-images/${Date.now()}-${file.name}`);
+
+    // Upload file
+    await uploadBytes(fileRef, file);
+
+    // Get downloadable URL
+    const imageURL = await getDownloadURL(fileRef);
+
 });
