@@ -21,11 +21,13 @@ body.app {
   padding: 16px 24px;
   background: linear-gradient(135deg, #2563eb, #1e40af);
   display: flex;
+  gap: 16px;
   justify-content: flex-end;
   align-items: center;
 }
 
-.profile-button {
+.profile-button,
+.uploadEvents-button {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -38,16 +40,19 @@ body.app {
   transition: transform 0.2s ease;
 }
 
-.profile-button:hover {
+.profile-button:hover,
+.uploadEvents-button:hover {
   transform: translateY(-2px);
 }
 
-.profile-icon {
+.profile-icon,
+.plus-icon {
   width: 32px;
   height: 32px;
 }
 
-.profile-text {
+.profile-text,
+.uploadEvents-text {
   font-weight: 600;
   color: #1e40af;
 }
