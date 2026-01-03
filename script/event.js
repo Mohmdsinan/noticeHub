@@ -1,43 +1,36 @@
-// event.js
 import { db } from "./firebase.js";
+import { collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-import {
-  collection,
-  getDocs,
-  query,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
- import { firebaseConfig } from "../.gitignore/firebaseConfig";
-const eventsGrid = document.getElementById("eventsGrid");
+const upcomingContainer = document.getElementById("upcomingEvents");
+const recentContainer = document.getElementById("recentEvents")
 
-/* 🔹 Fetch & Render Events */
-async function loadEvents() {
-  eventsGrid.innerHTML = " ";
-    
-  const q = query(collection(db, "events"), orderBy("createdAt", "desc"));
-  const snapshot = await getDocs(q);
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
-  snapshot.forEach(doc => {
-    const e = doc.data();
-    console.log(e);
-    
-    eventsGrid.innerHTML += `
-      <div class="event-card">
-        ${e.photo ? `<img src="${e.photo}" alt="Event poster">` : ""}
+onSnapshot(collection(db, "events"), (snapshot) => {
+  recentContainer.innerHTML = "";
+  upcomingContainer.innerHTML = "";
 
-        <p class="event-description">${e.description}</p>
-        <p class="event-date">${e.date}</p>
-        <p class="event-time">${e.time}</p>
-        <p class="event-venue">${e.venue}</p>
+  snapshot.forEach((doc) => {
+    const event = doc.data();
+    const eventDate = new Date(event.date);
+    eventDate.setHours(0, 0, 0, 0);
 
-        ${
-          e.registrationLink
-            ? `<a href="${e.registrationLink}" target="_blank" class="register-btn">Register</a>`
-            : ""
-        }
+    const card = `
+     <div class="event-cart">
+        <div class="event-img-wrapper">
+          <img src="${event.photo}" class="event-img">
+        </div>
+         <div class="event-details">
+            <p class="event-title">${event.title}</p>
+          </div>
       </div>
-    `;
+    `
+    if (eventDate < today){
+      recentContainer.innerHTML += card;
+    } else {
+      upcomingContainer.innerHTML += card;
+    }
   });
-}
+});
 
-loadEvents();

@@ -47,7 +47,7 @@ form.addEventListener("submit", async (e) => {
 
     //Adding the data
     const eventData = {
-        tilte: document.getElementById("title").value,
+        title: document.getElementById("title").value,
         date: document.getElementById("date").value,
         time: document.getElementById("time").value,
         venue: document.getElementById("venue").value,
