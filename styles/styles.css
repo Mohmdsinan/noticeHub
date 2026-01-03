@@ -98,7 +98,7 @@ body.app {
 /* =========================
    EVENT CARD
 ========================= */
-.event-cart {
+.event-card {
   background: #ffffff;
   border-radius: 18px;
   overflow: hidden;
@@ -107,7 +107,7 @@ body.app {
   cursor: pointer;
 }
 
-.event-cart:hover {
+.event-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 16px 34px rgba(37, 99, 235, 0.28);
 }
@@ -131,6 +131,30 @@ body.app {
   display: block;
 }
 
+.event-overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.3s ease;
+  z-index: 100;
+}
+
+.event-img-wrapper:hover .event-overlay {
+  opacity: 1;
+}
+
+.view-button {
+  background: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
 /* =========================
    HOVER OVERLAY
 ========================= */
@@ -144,29 +168,13 @@ body.app {
 }
 
 /* Show overlay on hover */
-.event-cart:hover .event-img-wrapper::after {
+.event-card:hover .event-img-wrapper::after {
   opacity: 1;
 }
 
-/* Button inside overlay */
-.event-img-wrapper::before {
-  content: "View Details";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
-  background: #ffffff;
-  color: #1e40af;
-  font-weight: 600;
-  padding: 12px 22px;
-  border-radius: 30px;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 2;
-}
 
 /* Show button on hover */
-.event-cart:hover .event-img-wrapper::before {
+.event-card:hover .event-img-wrapper::before {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }

@@ -1,6 +1,25 @@
-import { db } from "./firebase.js";
+import { db, auth } from "./firebase.js";
 import { collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+//Goto signIn.html if user do not signed in, else eventupload.html
+const uploadBtn = document.getElementById("eventUploadBtn");
+
+window.openEventDetails = (eventId) => {
+  window.location.href = `event-details.html?id=${eventId}`;
+};
+
+uploadBtn.addEventListener("click", () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user){
+      window.location.href = "eventupload.html"
+    } else {
+      window.location.href = "signIn.html"
+    }
+  });
+})
+
+// load Uploaded Events
 const upcomingContainer = document.getElementById("upcomingEvents");
 const recentContainer = document.getElementById("recentEvents")
 
@@ -14,12 +33,18 @@ onSnapshot(collection(db, "events"), (snapshot) => {
   snapshot.forEach((doc) => {
     const event = doc.data();
     const eventDate = new Date(event.date);
-    eventDate.setHours(0, 0, 0, 0);
+    eventDate.setHours(0, 0, 0, 0)
 
     const card = `
-     <div class="event-cart">
+     <div class="event-card">
+      
         <div class="event-img-wrapper">
           <img src="${event.photo}" class="event-img">
+          <div class="event-overlay">
+            <button class="view-button" onclick="openEventDetails('${doc.id}')">
+              View Details
+            </button>
+          </div>
         </div>
          <div class="event-details">
             <p class="event-title">${event.title}</p>
